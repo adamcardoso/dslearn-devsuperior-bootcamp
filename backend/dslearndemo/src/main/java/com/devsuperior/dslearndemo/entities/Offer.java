@@ -8,12 +8,12 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Entity
 @Table(name = "tb_offer")
 public class Offer implements Serializable {
@@ -21,15 +21,23 @@ public class Offer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Getter
+    @Setter private Long id;
 
-    private String edition;
-    private Instant startMoment;
-    private Instant endMoment;
+    @Getter
+    @Setter private String edition;
+    @Getter
+    @Setter private Instant startMoment;
+    @Getter
+    @Setter private Instant endMoment;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
+    @Getter
     private Course course;
+
+    @OneToMany(mappedBy = "offer")
+    @Getter private List<Resource> resources = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

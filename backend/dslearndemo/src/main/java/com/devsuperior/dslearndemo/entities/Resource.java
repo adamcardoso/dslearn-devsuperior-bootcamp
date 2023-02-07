@@ -1,45 +1,46 @@
 package com.devsuperior.dslearndemo.entities;
 
-
-import lombok.*;
+import com.devsuperior.dslearndemo.enums.ResourceType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_user")
-public class User implements Serializable {
-
+@Table(name = "tb_resource")
+public class Resource implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String email;
-    private String password;
+    private String title;
+    private String description;
+    private Integer position;
+    private String imgUri;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tb_user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    Set<Role> roles = new HashSet<>();
+    private ResourceType type;
+
+    @ManyToOne
+    @JoinColumn(name = "offer_id")
+    private Offer offer;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+        Resource resource = (Resource) o;
 
-        return Objects.equals(id, user.id);
+        return Objects.equals(id, resource.id);
     }
 
     @Override
