@@ -1,6 +1,5 @@
 package com.devsuperior.dslearndemo.entities;
 
-import com.devsuperior.dslearndemo.enums.ResourceType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,8 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -17,8 +14,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_resource")
-public class Resource implements Serializable {
+@Table(name = "tb_section")
+public class Section implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -29,23 +26,22 @@ public class Resource implements Serializable {
     private Integer position;
     private String imgUri;
 
-    private ResourceType type;
+    @ManyToOne
+    @JoinColumn(name = "resource_id")
+    private Resource resource;
 
     @ManyToOne
-    @JoinColumn(name = "offer_id")
-    private Offer offer;
-
-    @OneToMany(mappedBy = "resource")
-    private List<Section> sections = new ArrayList<>();
+    @JoinColumn(name = "prerequisite_id")
+    private Section prerequisite;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Resource resource = (Resource) o;
+        Section section = (Section) o;
 
-        return Objects.equals(id, resource.id);
+        return Objects.equals(id, section.id);
     }
 
     @Override
