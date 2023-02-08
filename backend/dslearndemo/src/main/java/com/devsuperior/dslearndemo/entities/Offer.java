@@ -26,8 +26,10 @@ public class Offer implements Serializable {
 
     @Getter
     @Setter private String edition;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     @Getter
     @Setter private Instant startMoment;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     @Getter
     @Setter private Instant endMoment;
 
