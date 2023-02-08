@@ -25,3 +25,5 @@ INSERT INTO tb_resource(title, description, position, img_Uri, type, offer_id) V
 INSERT INTO tb_section(title, description, position, img_Uri, resource_id, prerequisite_id) VALUES ('Seção 1', 'Neste capítulo vamos começar', 1, 'https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg', 1, null);
 INSERT INTO tb_section(title, description, position, img_Uri, resource_id, prerequisite_id) VALUES ('Seção 2', 'Neste capítulo vamos continuar', 2, 'https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg', 1, 1);
 INSERT INTO tb_section(title, description, position, img_Uri, resource_id, prerequisite_id) VALUES ('Seção 3', 'Neste capítulo vamos terminar', 3, 'https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg', 1, 2);
+
+INSERT INTO tb_enrollment (user_id, offer_id, enroll_Moment, refund_Moment, available, only_Update) VALUES (1, 1, TIMESTAMP WITH TIME ZONE '2021-11-20T13:00:00Z', null, true, false);
