@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService{
@@ -30,8 +31,9 @@ public class UserService implements UserDetailsService{
     @Transactional(readOnly = true)
     public UserDTO findById(Long id) {
         authService.validateSelfOrAdmin(id);
+        Optional<User> obj = userRepository.findById(id);
+        User user = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
         return new UserDTO(user);
     }
 
